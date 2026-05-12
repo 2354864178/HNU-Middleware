@@ -14,5 +14,9 @@ int main() {
     warn("This is a warn message");
     error("This is an error message");
     fatal("This is a fatal message");
+
+    LOG_INFO << "stream log: " << 2026 << ", " << 5 << ", " << 13;
+    LOG_WARN << "RAII stream log begin" << " | value = " << 42 << " | status = ok";
+
     return 0;
 }

@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "logger.h"
+#include "logstream.h"
 
 using namespace std;
 
@@ -14,7 +15,13 @@ namespace logger {
 
 const char* Logger::level_strings[LEVEL_COUNT] = {"DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
 
-Logger::Logger() : m_level(DEBUG), m_max(0), m_len(0) {}
+LogStream::LogStream(int level, const char* file, int line) : m_level(level), m_file(file), m_line(line) {}
+
+LogStream::~LogStream() {
+    Logger::Instance()->log(static_cast<Logger::level>(m_level), m_file, m_line, "%s", m_stream.str().c_str());
+}
+
+Logger::Logger() : m_level(DEBUG), m_max(0), m_len(0), m_console(true) {}
 
 Logger::~Logger() {
     close();
@@ -105,6 +112,10 @@ void Logger::rotate() {
         throw std::logic_error("rename log file failed: " + string(strerror(errno)));
     }
     open(m_file_name);
+}
+
+LogStream Logger::logStream(level level, const char* file, int line) {
+    return LogStream(level, file, line);
 }
 
 } // namespace logger
