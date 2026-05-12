@@ -29,6 +29,7 @@ template <typename... Args> class Signal {
 
     // 触发信号，调用所有连接的槽函数，传递参数给槽函数，线程安全
     void operator()(Args... args) {
+        SlotList local;
         {
             std::lock_guard<std::mutex> lock(mutex_);
             // 将槽函数列表复制到一个局部变量中，避免在调用槽函数时持有锁，减少锁的粒度，提高性能

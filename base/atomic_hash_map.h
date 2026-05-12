@@ -9,7 +9,7 @@ namespace hnu {
 namespace Middleware {
 namespace base {
 
-// // SFINAE 技术，启用该模板仅当 K 是整数类型且 TableSize 是 2 的幂次方时
+// SFINAE 技术，启用该模板仅当 K 是整数类型且 TableSize 是 2 的幂次方时
 template <typename K, typename V, std::size_t TableSize = 128,
           typename std::enable_if<std::is_integral<K>::value &&         // 只允许整数类型作为键
                                       (TableSize&(TableSize - 1)) == 0, // 哈希表大小必须是 2 的幂次方
@@ -96,7 +96,7 @@ class AtomicHashMap {
         }
 
         // 检查链表中是否存在指定键
-        bool Has(K key) {
+        bool Has(K key) const {
             Entry* m_target = head_->next.load(std::memory_order_acquire);
             while (Entry* target = m_target) {
                 if (target->key < key) {

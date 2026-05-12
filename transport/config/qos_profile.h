@@ -23,9 +23,9 @@ enum QosDurabilityPolicy {
 };
 
 struct QosProfile {
-    QosHistoryPolicy history = HISTORY_KEEP_LAST;
-    QosReliabilityPolicy reliability = RELIABILITY_RELIABLE;
-    QosDurabilityPolicy durability = DURABILITY_VOLATILE;
+    QosHistoryPolicy history = HISTORY_KEEP_LAST;            // 默认保留最新的消息
+    QosReliabilityPolicy reliability = RELIABILITY_RELIABLE; // 默认可靠传输
+    QosDurabilityPolicy durability = DURABILITY_VOLATILE;    // 默认易失性，不进行持久化
 };
 
 } // namespace config

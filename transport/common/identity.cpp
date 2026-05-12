@@ -6,18 +6,18 @@ namespace hnu {
 namespace Middleware {
 namespace transport {
 
-/*UUID是一个128位的唯一标识符*/
+// 构造函数，默认生成一个新的标识符
 Identity::Identity(bool need_generate) : hash_value_(0) {
     std::memset(data_, 0, ID_SIZE);
     if (need_generate) {
         uuid_t uuid;
-        uuid_generate(uuid);
+        uuid_generate(uuid); // 生成一个新的UUID
         std::memcpy(data_, uuid, ID_SIZE);
         Update();
     }
 }
 
-/* 拷贝构造函数 */
+// 拷贝构造函数
 Identity::Identity(const Identity& rhs) {
     std::memcpy(data_, rhs.data_, ID_SIZE);
     hash_value_ = rhs.hash_value_;
@@ -25,7 +25,7 @@ Identity::Identity(const Identity& rhs) {
 
 Identity::~Identity() {}
 
-/*重载 = */
+// 重载 =
 Identity& Identity::operator=(const Identity& rhs) {
     if (this != &rhs) {
         std::memcpy(data_, rhs.data_, ID_SIZE);

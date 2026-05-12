@@ -52,10 +52,10 @@ template <typename T> class UnboundedQueue {
             if (head_next == nullptr) { // 如果下一个节点为 nullptr，说明队列为空，出队失败
                 return false;
             }
-        } while (!head_.compare_exchange_strong(old_head, head_next))
+        } while (!head_.compare_exchange_strong(old_head, head_next));
 
-            * element = head_next->data; // 将新头节点的数据赋值给输出参数，表示出队成功
-        size_.fetch_sub(1);              // 减少队列大小，表示有一个元素从队列中移除
+        *element = head_next->data; // 将新头节点的数据赋值给输出参数，表示出队成功
+        size_.fetch_sub(1);         // 减少队列大小，表示有一个元素从队列中移除
         old_head->release();
         return true;
     }
