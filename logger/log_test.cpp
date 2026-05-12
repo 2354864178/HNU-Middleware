@@ -5,8 +5,9 @@ using namespace std;
 using namespace hnu::Middleware::logger;
 
 int main() {
-    Logger::instance()->open("test.log");
-    Logger::instance()->set_level(Logger::INFO);
+    Logger::Instance()->open("test.log");
+    // Logger::Instance()->set_level(Logger::INFO);
+    Logger::Instance()->max(1024);
 
     debug("This is a debug message");
     info("This is an info message");

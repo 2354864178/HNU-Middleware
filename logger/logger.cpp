@@ -14,7 +14,7 @@ namespace logger {
 
 const char* Logger::level_strings[LEVEL_COUNT] = {"DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
 
-Logger::Logger() {}
+Logger::Logger() : m_level(DEBUG), m_max(0), m_len(0) {}
 
 Logger::~Logger() {
     close();
@@ -27,6 +27,8 @@ void Logger::open(const std::string& file_name) {
     if (m_fout.fail()) {
         throw std::logic_error("Failed to open log file: " + file_name);
     }
+    m_fout.seekp(0, std::ios::end); // 移动文件写指针到文件的末尾
+    m_len = m_fout.tellp();         // 返回当前写指针在文件中的位置，即从文件开始到写指针当前位置的字节数
 }
 
 void Logger::close() {
@@ -55,10 +57,13 @@ void Logger::log(level level, const char* file, int line, const char* format, ..
         memset(buffer, 0, size + 1);
         snprintf(buffer, size + 1, ftm, time_buffer, level_strings[level], file, line);
         buffer[size] = '\0';
-        m_fout << buffer << ' ';
+        m_fout << buffer;
         // std::cout << buffer << std::endl;
+        m_len += size;
         delete[] buffer;
     }
+
+    m_fout << ' ';
 
     va_list arg_ptr;
     va_start(arg_ptr, format);
@@ -71,16 +76,35 @@ void Logger::log(level level, const char* file, int line, const char* format, ..
         va_end(arg_ptr);
         // std::cout << content << std::endl;
         content[size] = '\0';
-        m_fout << content << std::endl;
+        m_fout << content;
+        m_len += size;
         delete[] content;
     }
-
+    m_fout << '\n';
     m_fout.flush();
 
+    if (m_len >= m_max && m_max > 0) {
+        std::cout << "Rotating log file..." << std::endl;
+        rotate();
+    }
     // std::cout << time_buffer << std::endl;
     // std::cout << file << std::endl;
     // std::cout << line << std::endl;
     // std::cout << format << std::endl;
+}
+
+void Logger::rotate() {
+    close();
+    time_t ticks = time(NULL);
+    struct tm* ptm = localtime(&ticks);
+    char timestamp[32];
+    memset(timestamp, 0, sizeof(timestamp));
+    strftime(timestamp, sizeof(timestamp), ".%Y-%m-%d_%H-%M-%S", ptm);
+    string filename = m_file_name + timestamp;
+    if (rename(m_file_name.c_str(), filename.c_str()) != 0) {
+        throw std::logic_error("rename log file failed: " + string(strerror(errno)));
+    }
+    open(m_file_name);
 }
 
 } // namespace logger
