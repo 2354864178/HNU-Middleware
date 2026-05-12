@@ -6,7 +6,8 @@ using namespace hnu::Middleware::logger;
 
 int main() {
     Logger::instance()->open("test.log");
-    // Logger::instance()->log(Logger::DEBUG, __FILE__, __LINE__, "This is a debug message");
+    Logger::instance()->set_level(Logger::INFO);
+
     debug("This is a debug message");
     info("This is an info message");
     warn("This is a warn message");

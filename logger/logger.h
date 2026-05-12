@@ -3,6 +3,8 @@
 #include <string>
 #include <fstream>
 
+#include "../common/macros.h"
+
 namespace hnu {
 namespace Middleware {
 namespace logger {
@@ -21,6 +23,9 @@ public:
     void open(const std::string& file_name);
     void close();
     void log(level level, const char* file, int line, const char* format, ...);
+    void set_level(int level) {
+        m_level = level;
+    }
 
 private:
     Logger();
@@ -29,8 +34,9 @@ private:
 private:
     std::string m_file_name;                       // 日志文件名
     std::ofstream m_fout;                          // 日志文件输出流
+    int m_level;                                   // 当前日志级别
     static const char* level_strings[LEVEL_COUNT]; // 日志级别字符串表示
-    static Logger* m_instance;                     // 单例实例
+    DECLARE_SINGLETON(Logger);                     // 声明单例类，禁止复制和赋值操作
 };
 
 } // namespace logger

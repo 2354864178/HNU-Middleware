@@ -14,23 +14,10 @@ namespace logger {
 
 const char* Logger::level_strings[LEVEL_COUNT] = {"DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
 
-Logger* Logger::m_instance = nullptr; // 初始化单例实例指针
-
 Logger::Logger() {}
 
 Logger::~Logger() {
-    // 析构函数，关闭日志文件输出流
-    if (m_fout.is_open()) {
-        m_fout.close();
-    }
-}
-
-Logger* Logger::instance() {
-    // 获取单例实例
-    if (m_instance == nullptr) {
-        m_instance = new Logger();
-    }
-    return m_instance;
+    close();
 }
 
 void Logger::open(const std::string& file_name) {
@@ -48,6 +35,10 @@ void Logger::close() {
 }
 
 void Logger::log(level level, const char* file, int line, const char* format, ...) {
+    if (level < m_level) {
+        return; // 如果日志级别低于当前设置的级别，则不记录日志
+    }
+
     if (m_fout.fail()) {
         throw std::logic_error("Log file is not open.");
     }
