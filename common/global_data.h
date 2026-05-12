@@ -9,6 +9,7 @@ namespace hnu {
 namespace Middleware {
 namespace common {
 
+// 全局数据类，包含主机信息和进程信息
 class GlobalData {
     public:
     ~GlobalData();

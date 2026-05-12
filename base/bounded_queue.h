@@ -53,7 +53,7 @@ template <typename T> class BoundedQueue {
 
     alignas(CACHELINE_SIZE) std::atomic<uint64_t> head_ = {0};
     alignas(CACHELINE_SIZE) std::atomic<uint64_t> tail_ = {1};
-    alignas(CACHELINE_SIZE) std::atomic<uint64_t> commit_ = {1};
+    alignas(CACHELINE_SIZE) std::atomic<uint64_t> commit_ = {1}; // 已经提交的 tail，消费者只能看到 commit 之前的元素
     // alignas(CACHELINE_SIZE) std::atomic<uint64_t> size_ = {0};
     uint64_t pool_size_ = 0;
     T* pool_ = nullptr;
