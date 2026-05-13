@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 #include <vector>
 #include <iostream>
 #include <string>
@@ -14,10 +15,12 @@ namespace hnu {
 namespace Middleware {
 namespace serialize {
 
+class Serializable;
+
 // 数据流类，提供序列化和反序列化功能，支持基本数据类型和常用容器类型
 class DataStream {
-    public:
-    enum DataType { BOOL = 0, CHAR, INT32, INT64, FLOAT, DOUBLE, STRING, VECTOR, LIST, MAP, SET, CUSTOM };
+public:
+    enum DataType { BOOL = 0, CHAR, INT32, INT64, UINT32, UINT64, FLOAT, DOUBLE, ENUM, STRING, VECTOR, LIST, MAP, SET, CUSTOM };
 
     enum ByteOrder {
         BigEndian,   // 大端存储：高位字节在前，低位字节在后
@@ -34,13 +37,15 @@ class DataStream {
     void write(bool value);                // 写入布尔值到数据流中
     void write(char value);                // 写入字符到数据流中
     void write(int32_t value);             // 写入32位整数到数据流中
-    void write(int64_t value);
+    void write(uint32_t value);            // 写入32位无符号整数到数据流中
+    void write(int64_t value);             // 写入64位整数到数据流中
+    void write(uint64_t value);            // 写入64位无符号整数到数据流中
     void write(float value);
     void write(double value);
     void write(const char* value);
     void write(const std::string& value); // 写入字符串到数据流中，先写入长度再写入内容
 
-    template <typename T> void write(const std::vector<T>& value);  // 写入 vector 容器到数据流中，先写入长度再写入每个元素
+    template <typename T> void write(const std::vector<T>& value); // 写入 vector 容器到数据流中，先写入长度再写入每个元素
 
     template <typename T> void write(const std::list<T>& value);
 
@@ -69,13 +74,17 @@ class DataStream {
 
     template <typename T> DataStream& operator<<(const std::set<T>& value);
 
+    bool read(char* data, int len);
     bool read(bool& value);
     bool read(char& value);
     bool read(int32_t& value);
     bool read(int64_t& value);
+    bool read(uint32_t& value);
+    bool read(uint64_t& value);
     bool read(float& value);
     bool read(double& value);
     bool read(std::string& value);
+    bool read(Serializable& value);
 
     template <typename T> bool read(std::vector<T>& value);
 
@@ -105,17 +114,17 @@ class DataStream {
 
     template <typename T> DataStream& operator>>(std::set<T>& value);
 
-    public:
+public:
     const char* data() const;
     size_t size() const;
     void clear();
     void reset();
 
-    private:
+private:
     void reserve(int len);
     ByteOrder byteorder();
 
-    private:
+private:
     ByteOrder m_byteorder;
     std::vector<char> m_buf;
     int m_pos;

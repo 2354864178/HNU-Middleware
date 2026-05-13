@@ -1,4 +1,5 @@
 #include "data_stream.h"
+#include "serializable.h"
 
 namespace hnu {
 namespace Middleware {
@@ -153,6 +154,28 @@ void DataStream::write(int64_t value) {
     write((char*)&value, sizeof(int64_t));
 }
 
+void DataStream::write(uint32_t value) {
+    char type = DataType::UINT32;
+    write((char*)&type, sizeof(char));
+    if (m_byteorder == ByteOrder::BigEndian) {
+        char* first = (char*)&value;
+        char* last = first + sizeof(uint32_t);
+        std::reverse(first, last);
+    }
+    write((char*)&value, sizeof(uint32_t));
+}
+
+void DataStream::write(uint64_t value) {
+    char type = DataType::UINT64;
+    write((char*)&type, sizeof(char));
+    if (m_byteorder == ByteOrder::BigEndian) {
+        char* first = (char*)&value;
+        char* last = first + sizeof(uint64_t);
+        std::reverse(first, last);
+    }
+    write((char*)&value, sizeof(uint64_t));
+}
+
 void DataStream::write(float value) {
     char type = DataType::FLOAT;
     write((char*)&type, sizeof(char));
@@ -189,6 +212,12 @@ void DataStream::write(const std::string& value) {
     int len = value.size();
     write(len);
     write(value.data(), len);
+}
+
+bool DataStream::read(char* data, int len) {
+    std::memcpy(data, (char*)&m_buf[m_pos], len);
+    m_pos += len;
+    return true;
 }
 
 bool DataStream::read(bool& value) {
@@ -241,6 +270,36 @@ bool DataStream::read(int64_t& value) {
     return true;
 }
 
+bool DataStream::read(uint32_t& value) {
+    if (m_buf[m_pos] != DataType::UINT32) {
+        return false;
+    }
+    ++m_pos;
+    value = *((uint32_t*)(&m_buf[m_pos]));
+    if (m_byteorder == ByteOrder::BigEndian) {
+        char* first = (char*)&value;
+        char* last = first + sizeof(uint32_t);
+        std::reverse(first, last);
+    }
+    m_pos += 4;
+    return true;
+}
+
+bool DataStream::read(uint64_t& value) {
+    if (m_buf[m_pos] != DataType::UINT64) {
+        return false;
+    }
+    ++m_pos;
+    value = *((uint64_t*)(&m_buf[m_pos]));
+    if (m_byteorder == ByteOrder::BigEndian) {
+        char* first = (char*)&value;
+        char* last = first + sizeof(uint64_t);
+        std::reverse(first, last);
+    }
+    m_pos += 8;
+    return true;
+}
+
 bool DataStream::read(float& value) {
     if (m_buf[m_pos] != DataType::FLOAT) {
         return false;
@@ -284,6 +343,10 @@ bool DataStream::read(string& value) {
     value.assign((char*)&(m_buf[m_pos]), len);
     m_pos += len;
     return true;
+}
+
+bool DataStream::read(Serializable& value) {
+    return value.unserialize(*this);
 }
 
 DataStream& DataStream::operator<<(bool value) {

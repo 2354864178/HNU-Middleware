@@ -1,12 +1,14 @@
 #pragma once
 
+#include "data_stream.h"
+
 namespace hnu {
 namespace Middleware {
 namespace serialize {
 
 class DataStream;
 class Serializable {
-    public:
+public:
     virtual void serialize(DataStream& stream) const = 0; // serialize 方法用于将对象的状态写入数据流中，供序列化使用，参数是一个 DataStream 对象的引用
     virtual bool unserialize(DataStream& stream) = 0;     // unserialize 方法用于从数据流中读取对象的状态，供反序列化使用，参数是一个 DataStream 对象的引用，返回值表示反序列化是否成功
 };

@@ -15,7 +15,7 @@ using EndpointPtr = std::shared_ptr<Endpoint>;
 
 // Endpoint类，表示通信的端点，包含一个标识符和角色属性
 class Endpoint {
-    public:
+public:
     explicit Endpoint(const RoleAttributes& attr);
     virtual ~Endpoint();
 
@@ -26,7 +26,7 @@ class Endpoint {
         return attr_;
     }
 
-    private:
+private:
     bool enabled_;
     Identity id_;
     RoleAttributes attr_;

@@ -1,8 +1,13 @@
 #pragma once
 
+#include "../../serialize/serializable.h"
+#include "../../serialize/data_stream.h"
+
 namespace hnu {
 namespace Middleware {
 namespace config {
+
+using namespace serialize;
 
 enum QosHistoryPolicy {
     HISTORY_SYSTEM_DEFAULT = 0, // 默认值，具体行为由系统决定
@@ -22,10 +27,17 @@ enum QosDurabilityPolicy {
     DURABILITY_VOLATILE = 2,        // 易失性，不进行持久化，消息在发布后不会被保存在本地，订阅者只能接收发布时刻之后发布的消息。这种策略适用于对实时性要求较高的场景，但可能会导致消息丢失。
 };
 
-struct QosProfile {
-    QosHistoryPolicy history = HISTORY_KEEP_LAST;            // 默认保留最新的消息
-    QosReliabilityPolicy reliability = RELIABILITY_RELIABLE; // 默认可靠传输
-    QosDurabilityPolicy durability = DURABILITY_VOLATILE;    // 默认易失性，不进行持久化
+/*Qos配置信息结构体，支持序列化*/
+class QosProfile : public Serializable {
+public:
+    QosHistoryPolicy history = HISTORY_KEEP_LAST;
+    uint32_t depth = 2; // default = 1
+    uint32_t mps = 3;   // [default = 0];    // messages per second
+    uint32_t msg_size = 0;
+    QosReliabilityPolicy reliability = RELIABILITY_RELIABLE;
+    QosDurabilityPolicy durability = DURABILITY_VOLATILE;
+
+    SERIALIZE(history, depth, mps, msg_size, reliability, durability)
 };
 
 } // namespace config
