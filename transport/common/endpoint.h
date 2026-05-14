@@ -9,7 +9,6 @@ namespace hnu {
 namespace Middleware {
 namespace transport {
 
-using namespace config;
 class Endpoint;
 using EndpointPtr = std::shared_ptr<Endpoint>;
 

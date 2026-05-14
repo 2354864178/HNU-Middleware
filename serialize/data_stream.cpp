@@ -214,6 +214,15 @@ void DataStream::write(const std::string& value) {
     write(value.data(), len);
 }
 
+void DataStream::write(const Serializable& value) {
+    value.serialize(*this);
+}
+
+DataStream& DataStream::operator<<(const Serializable& value) {
+    write(value);
+    return *this;
+}
+
 bool DataStream::read(char* data, int len) {
     std::memcpy(data, (char*)&m_buf[m_pos], len);
     m_pos += len;
@@ -422,6 +431,15 @@ DataStream& DataStream::operator>>(double& value) {
 DataStream& DataStream::operator>>(string& value) {
     read(value);
     return *this;
+}
+
+// base-case for variadic write_args: do nothing
+void DataStream::write_args() {
+}
+
+// base-case for variadic read_args: nothing to read, return true
+bool DataStream::read_args() {
+    return true;
 }
 
 } // namespace serialize

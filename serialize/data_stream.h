@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <type_traits>
 #include <stdexcept>
 #include <cstring>
 #include <list>
@@ -44,6 +45,13 @@ public:
     void write(double value);
     void write(const char* value);
     void write(const std::string& value); // 写入字符串到数据流中，先写入长度再写入内容
+    void write(const Serializable& value);
+
+    // Enum write/read helpers
+    template <typename E, typename = typename std::enable_if<std::is_enum<E>::value>::type> void write(E value) {
+        using Under = typename std::underlying_type<E>::type;
+        write(static_cast<Under>(value));
+    }
 
     template <typename T> void write(const std::vector<T>& value); // 写入 vector 容器到数据流中，先写入长度再写入每个元素
 
@@ -65,6 +73,7 @@ public:
     DataStream& operator<<(double value);
     DataStream& operator<<(const std::string& value);
     DataStream& operator<<(const char* value);
+    DataStream& operator<<(const Serializable& value);
 
     template <typename T> DataStream& operator<<(const std::vector<T>& value);
 
@@ -85,6 +94,15 @@ public:
     bool read(double& value);
     bool read(std::string& value);
     bool read(Serializable& value);
+
+    template <typename E, typename = typename std::enable_if<std::is_enum<E>::value>::type> bool read(E& value) {
+        using Under = typename std::underlying_type<E>::type;
+        Under tmp;
+        if (!read(tmp))
+            return false;
+        value = static_cast<E>(tmp);
+        return true;
+    }
 
     template <typename T> bool read(std::vector<T>& value);
 

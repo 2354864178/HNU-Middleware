@@ -1,5 +1,5 @@
 #include "endpoint.h"
-#include "../common/global_data.h"
+#include "../../common/global_data.h"
 
 namespace hnu {
 namespace Middleware {

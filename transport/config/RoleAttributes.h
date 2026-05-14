@@ -7,7 +7,7 @@
 
 namespace hnu {
 namespace Middleware {
-namespace config {
+namespace transport {
 using namespace serialize;
 struct RoleAttributes : public serialize::Serializable {
     std::string host_name; // 主机名
@@ -27,6 +27,6 @@ struct RoleAttributes : public serialize::Serializable {
     SERIALIZE(host_name, host_ip, process_id, channel_name, qos_profile, id, node_name, node_id, message_type)
 };
 
-} // namespace config
+} // namespace transport
 } // namespace Middleware
 } // namespace hnu

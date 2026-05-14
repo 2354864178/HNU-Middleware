@@ -5,7 +5,7 @@
 
 namespace hnu {
 namespace Middleware {
-namespace config {
+namespace transport {
 
 using namespace serialize;
 
@@ -40,6 +40,6 @@ public:
     SERIALIZE(history, depth, mps, msg_size, reliability, durability)
 };
 
-} // namespace config
+} // namespace transport
 } // namespace Middleware
 } // namespace hnu

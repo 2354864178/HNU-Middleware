@@ -4,7 +4,7 @@ namespace hnu {
 namespace Middleware {
 namespace common {
 
-std::string GetFileName(const std::string& path, const bool remove_extension = false) {
+std::string GetFileName(const std::string& path, const bool remove_extension) {
     // 找到字符串中最后一个 `/`的位置
     std::string::size_type start = path.rfind('/');
     if (start == std::string::npos) { // 如果字符串中没有`/` ，则 start = 0
