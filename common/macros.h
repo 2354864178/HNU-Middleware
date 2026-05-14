@@ -1,5 +1,4 @@
-#ifndef CMW_COMMON_MACROS_H_
-#define CMW_COMMON_MACROS_H_
+#pragma once
 
 #include <iostream>
 #include <memory>
@@ -8,6 +7,11 @@
 #include <utility>
 
 #include "../base/macros.h"
+
+#undef UNUSED
+#undef DISALLOW_COPY_AND_ASSIGN
+
+#define UNUSED(param) (void)param // 将未使用的参数标记为已使用，避免编译器警告
 
 DEFINE_TYPE_TRAIT(HasShutdown, Shutdown)
 
@@ -26,7 +30,7 @@ template <typename T> typename std::enable_if<!HasShutdown<T>::value>::type Call
 
 // 定义一个单例类，使用 Meyers 单例模式实现，提供一个静态 Instance 方法用于获取单例实例，支持延迟创建和线程安全，提供一个 CleanUp 方法用于清理单例实例，禁止复制和赋值操作
 #define DECLARE_SINGLETON(classname)                                                                                                                                                                                                                                                                                                                                                                           \
-    public:                                                                                                                                                                                                                                                                                                                                                                                                    \
+public:                                                                                                                                                                                                                                                                                                                                                                                                        \
     static classname* Instance(bool create_if_needed = true) {                                                                                                                                                                                                                                                                                                                                                 \
         static classname* instance = nullptr;                                                                                                                                                                                                                                                                                                                                                                  \
         if (!instance && create_if_needed) {                                                                                                                                                                                                                                                                                                                                                                   \
@@ -43,8 +47,6 @@ template <typename T> typename std::enable_if<!HasShutdown<T>::value>::type Call
         }                                                                                                                                                                                                                                                                                                                                                                                                      \
     }                                                                                                                                                                                                                                                                                                                                                                                                          \
                                                                                                                                                                                                                                                                                                                                                                                                                \
-    private:                                                                                                                                                                                                                                                                                                                                                                                                   \
+private:                                                                                                                                                                                                                                                                                                                                                                                                       \
     classname();                                                                                                                                                                                                                                                                                                                                                                                               \
     DISALLOW_COPY_AND_ASSIGN(classname)
-
-#endif

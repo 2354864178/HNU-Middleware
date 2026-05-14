@@ -7,10 +7,15 @@
 
 #include "global_data.h"
 #include "file.h"
+#include "util.h"
 
 namespace hnu {
 namespace Middleware {
 namespace common {
+
+// 类中静态成员是类的一部分，但是不是类的实例的一部分，因此需要在此定义
+AtomicHashMap<uint64_t, std::string, 256> GlobalData::channel_id_map_;
+AtomicHashMap<uint64_t, std::string, 512> GlobalData::node_id_map_;
 
 // 返回当前执行的进程的路径
 const std::string kEmptyString = "";
@@ -110,6 +115,56 @@ const std::string& GlobalData::HostIp() const {
 }
 const std::string& GlobalData::HostName() const {
     return host_name_;
+}
+
+// 注册Channel
+uint64_t GlobalData::RegisterChannel(const std::string& channel) {
+    // 拿到channel的哈希值
+    auto id = Hash(channel);
+    // 如果channel_id_map_能找到此id，
+    while (channel_id_map_.Has(id)) {
+        std::string* name = nullptr;
+        channel_id_map_.Get(id, &name);
+        if (channel == *name) {
+            // 此channel已经被注册，直接break
+            break;
+        }
+        // 说明有其他channel和当前的哈希值相等，出现了碰撞，将id++
+        ++id;
+        std::cout << "Channel name hash collision: " << channel << " <=> " << *name;
+    }
+
+    channel_id_map_.Set(id, channel);
+    return id;
+}
+
+// 注册Node
+uint64_t GlobalData::RegisterNode(const std::string& node_name) {
+    // 拿到node_name的哈希值
+    auto id = Hash(node_name);
+    // 检查hashmap中是否含有id
+    while (node_id_map_.Has(id)) {
+        // 如果id存在
+        std::string* name = nullptr;
+        node_id_map_.Get(id, &name);
+        if (node_name == *name) {
+            break;
+        }
+        // 说明有其他node_name和当前的哈希值相等，出现了哈希碰撞，将id++
+        ++id;
+        std::cout << " Node name hash collision: " << node_name << " <=> " << *name << std::endl;
+    }
+    // 确保node_name是一个唯一的id
+    node_id_map_.Set(id, node_name);
+    return id;
+}
+
+std::string GlobalData::GetChannelById(uint64_t id) {
+    std::string* channel = nullptr;
+    if (channel_id_map_.Get(id, &channel)) {
+        return *channel;
+    }
+    return kEmptyString;
 }
 
 } // namespace common

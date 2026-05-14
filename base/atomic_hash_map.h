@@ -15,13 +15,13 @@ template <typename K, typename V, std::size_t TableSize = 128,
                                       (TableSize&(TableSize - 1)) == 0, // 哈希表大小必须是 2 的幂次方
                                   int>::type = 0>
 class AtomicHashMap {
-    public:
+public:
     AtomicHashMap() : capacity_(TableSize), mode_num_(capacity_ - 1) {}
     AtomicHashMap(const AtomicHashMap& other) = delete;            // 禁止复制构造
     AtomicHashMap& operator=(const AtomicHashMap& other) = delete; // 禁止复制赋值
 
     // 检查键是否存在
-    bool HAS(K key) const {
+    bool Has(K key) const {
         uint64_t index = key & mode_num_; // 计算哈希值
         return table_[index].Has(key);
     }
@@ -84,7 +84,7 @@ class AtomicHashMap {
 
     // 桶类，包含一个指向链表头的指针，以及一些操作链表的方法
     class Bucket {
-        public:
+    public:
         Bucket() : head_(new Entry()) {} // 构造函数，初始化链表头为一个哨兵节点
         ~Bucket() {
             Entry* ite = head_;
@@ -255,7 +255,7 @@ class AtomicHashMap {
         Entry* head_; // 桶的链表头，指向一个哨兵节点，哨兵节点不存储实际数据，只是为了简化链表操作
     };
 
-    private:
+private:
     Bucket table_[TableSize]; // 哈希表数组，大小为 TableSize
     uint64_t capacity_;       // 哈希表的容量，等于 TableSize
     uint64_t mode_num_;       // 哈希表的掩码，用于计算哈希值，等于 TableSize - 1
