@@ -63,8 +63,7 @@ void PerfEventCache::Run() {
             of_ << event->SerializeToString() << std::endl;
             buf_size++;
             if (buf_size >= kFlushSize) {
-                // 一次性写入文件
-                of_.flush();
+                of_.flush(); // 将缓冲区中的数据写入文件，确保数据不会丢失
                 buf_size = 0;
             }
         }
@@ -73,19 +72,20 @@ void PerfEventCache::Run() {
 
 void PerfEventCache::Start() {
 
-    std::string perf_file = "cmw_perf_.data";
+    std::string perf_file = "MID_perf_.data"; // 需要根据配置文件读取 perf_file 的值用于标识性能事件记录的文件路径和名称
 
     // 将文件名中的 ' ' 替换成 '_' ， ':' 替换成 '-'
     std::replace(perf_file.begin(), perf_file.end(), ' ', '_');
     std::replace(perf_file.begin(), perf_file.end(), ':', '-');
 
     // 打开文件
-    of_.open(perf_file, std::ios::trunc);
+    of_.open(perf_file, std::ios::trunc); // 以覆盖的方式打开文件，如果文件不存在则创建新文件
 
-    perf_file_ = perf_file;
+    perf_file_ = perf_file; // 将局部变量文件路径和名称保存到成员变量中
 
-    io_thread_ = std::thread(&PerfEventCache::Run, this);
+    io_thread_ = std::thread(&PerfEventCache::Run, this); // 启动一个新的线程来运行 Run() 方法，负责从事件队列中获取事件并写入文件
 }
+
 } // namespace event
 } // namespace Middleware
 } // namespace hnu

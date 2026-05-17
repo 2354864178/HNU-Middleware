@@ -29,19 +29,19 @@ private:
     void Start();
     void Run();
 
-    std::thread io_thread_;
-    std::ofstream of_;
+    std::thread io_thread_; // 用于运行 Run() 方法的线程对象，负责从事件队列中获取事件并写入文件
+    std::ofstream of_;      // 用于写入性能事件数据的文件输出流对象
 
-    bool enable_ = false;
-    bool shutdown_ = false;
+    bool enable_ = false;   // 标志位，表示是否开启事件记录功能，AddTransportEvent() 方法会根据这个标志位来决定是否将事件添加到事件队列中
+    bool shutdown_ = false; // 标志位，表示是否正在关闭中，Run() 方法会根据这个标志位来决定是否继续从事件队列中获取事件并写入文件
 
-    std::string perf_file_ = "";
-    base::BoundedQueue<EventBasePtr> event_queue_;
+    std::string perf_file_ = "";                   // 用于保存性能事件记录的文件路径和名称，Start() 方法会根据配置文件读取 perf_file 的值并将其保存到这个成员变量中
+    base::BoundedQueue<EventBasePtr> event_queue_; // 用于存储性能事件的有界队列，AddTransportEvent() 方法会将事件添加到这个队列中，Run() 方法会从这个队列中获取事件并写入文件
 
-    const int kFlushSize = 512;
+    const int kFlushSize = 512;            // 每次写入文件的事件数量，当事件数量达到这个值时就会调用 of_.flush() 方法将数据写入文件
     const uint64_t kEventQueueSize = 8192; // 事件队列的长度
 
-    DECLARE_SINGLETON(PerfEventCache)
+    DECLARE_SINGLETON(PerfEventCache) // 声明单例模式，确保全局只有一个 PerfEventCache 实例，提供一个静态方法 Instance() 来获取这个实例
 };
 
 } // namespace event

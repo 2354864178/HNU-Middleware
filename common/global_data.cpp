@@ -18,7 +18,7 @@ AtomicHashMap<uint64_t, std::string, 256> GlobalData::channel_id_map_;
 AtomicHashMap<uint64_t, std::string, 512> GlobalData::node_id_map_;
 
 // 返回当前执行的进程的路径
-const std::string kEmptyString = "";
+const std::string kEmptyString = ""; // 当无法获取程序路径时返回的默认值
 std::string program_path() {
     char path[4096];
     auto len = readlink("/proc/self/exe", path, sizeof(path) - 1);
@@ -119,6 +119,7 @@ const std::string& GlobalData::HostName() const {
 
 // 注册Channel
 uint64_t GlobalData::RegisterChannel(const std::string& channel) {
+    // std::cout << "Register channel: " << channel << std::endl;
     // 拿到channel的哈希值
     auto id = Hash(channel);
     // 如果channel_id_map_能找到此id，

@@ -3,6 +3,11 @@
 #include <cstdlib>
 #include <new>
 
+// UNUSED宏用于标记未使用的变量或参数，避免编译器发出警告
+#ifndef CACHELINE_SIZE
+#define CACHELINE_SIZE 64
+#endif
+
 #if __GNUC__ >= 3
 #define cyber_likely(x) (__builtin_expect((x), 1))   // GCC提供的一个内置函数，用于告诉编译器某个条件表达式的结果更可能是true还是false，从而优化代码的执行路径。
 #define cyber_unlikely(x) (__builtin_expect((x), 0)) // GCC提供的一个内置函数，用于告诉编译器某个条件表达式的结果更可能是true还是false，从而优化代码的执行路径。

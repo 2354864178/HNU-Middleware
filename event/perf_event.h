@@ -12,7 +12,7 @@ namespace hnu {
 namespace Middleware {
 namespace event {
 
-// 定义了三种事件的枚举，包括 调度 通信
+// 定义了三种事件的枚举，包括 调度 通信 和尝试获取事件
 enum class EventType { SCHED_EVENT = 0, TRANS_EVENT = 1, TRY_FETCH_EVENT = 3 };
 
 enum class TransPerf {
