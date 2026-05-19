@@ -9,7 +9,7 @@
 #include <fastdds/rtps/attributes/WriterAttributes.hpp>
 #include <fastdds/rtps/attributes/ReaderAttributes.hpp>
 #include <fastdds/rtps/attributes/HistoryAttributes.hpp>
-#include <src/cpp/xmlparser/attributes/TopicAttributes.hpp>
+#include <xmlparser/attributes/TopicAttributes.hpp>
 
 using namespace eprosima::fastdds::dds;
 using namespace eprosima::fastdds::rtps;

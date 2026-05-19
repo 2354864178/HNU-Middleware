@@ -63,7 +63,7 @@ private:
     Identity sender_id_; // 发送者ID
     Identity spare_id_;  // 备用发送者 ID
     uint64_t channel_id_ = 0;
-    uint64_t seq_num_ = 0;
+    uint64_t seq_num_ = 0; // 消息的序列号，可以用来区分消息的先后顺序
 };
 
 } // namespace transport

@@ -7,7 +7,9 @@
                 "/usr/include",
                 "/usr/local/include",
                 "/home/ysy/Fast-DDS/Fast-DDS",
-                "/home/ysy/Fast-DDS/Fast-DDS/include"
+                "/home/ysy/Fast-DDS/Fast-DDS/include",
+                "/home/ysy/Fast-DDS/Fast-DDS/src/cpp",
+                "/home/ysy/Fast-DDS"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",
@@ -16,7 +18,10 @@
             "intelliSenseMode": "gcc-x64",
             "browse": {
                 "path": [
-                    "${workspaceFolder}/**"
+                    "${workspaceFolder}/**",
+                    "/home/ysy/Fast-DDS/Fast-DDS/include",
+                    "/home/ysy/Fast-DDS/Fast-DDS/src/cpp",
+                    "/home/ysy/Fast-DDS"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             }
