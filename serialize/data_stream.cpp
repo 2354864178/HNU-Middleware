@@ -1,5 +1,7 @@
 #include "data_stream.h"
 #include "serializable.h"
+#include <fstream>
+#include <sstream>
 
 namespace hnu {
 namespace Middleware {
@@ -32,6 +34,28 @@ void DataStream::clear() {
 // 重置位置指针 m_pos 到 0，准备从头开始读取数据
 void DataStream::reset() {
     m_pos = 0;
+}
+
+// 获取序列化后的数据的字节大小
+size_t DataStream::ByteSize() {
+    return sizeof(char) * m_buf.size();
+}
+
+void DataStream::save(const string& filename) {
+    ofstream fout(filename);
+    fout.write(data(), size());
+    fout.flush();
+    fout.close();
+}
+
+void DataStream::load(const string& filename) {
+    ifstream fin(filename);
+    stringstream ss;
+    ss << fin.rdbuf();
+    const string& str = ss.str();
+    m_buf.clear();
+    reserve(str.size());
+    write(str.data(), str.size());
 }
 
 /*判断机器是大端存储还是小端存储*/
@@ -434,8 +458,7 @@ DataStream& DataStream::operator>>(string& value) {
 }
 
 // base-case for variadic write_args: do nothing
-void DataStream::write_args() {
-}
+void DataStream::write_args() {}
 
 // base-case for variadic read_args: nothing to read, return true
 bool DataStream::read_args() {

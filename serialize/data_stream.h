@@ -135,8 +135,11 @@ public:
 public:
     const char* data() const;
     size_t size() const;
+    size_t ByteSize();
     void clear();
     void reset();
+    void save(const string& filename);
+    void load(const string& filename);
 
 private:
     void reserve(int len);
