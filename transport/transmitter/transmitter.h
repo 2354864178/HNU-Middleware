@@ -4,9 +4,9 @@
 #include <memory>
 #include <string>
 
-#include "../../common/endpoint.h"
-#include "../message/message_info.h"
-#include "../../event/perf_event_cache.h"
+#include "transport/common/endpoint.h"
+#include "transport/message/message_info.h"
+#include "event/perf_event_cache.h"
 
 namespace hnu {
 namespace Middleware {

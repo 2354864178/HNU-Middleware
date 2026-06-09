@@ -3,8 +3,8 @@
 #include "notifier_factory.h"
 #include "condition_notifier.h"
 #include "multicast_notifier.h"
-#include "../../common/global_data.h"
-#include "../../common/log.h"
+#include "common/global_data.h"
+#include "common/log.h"
 
 namespace hnu {
 namespace Middleware {

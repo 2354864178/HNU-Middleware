@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 #include "multicast_notifier.h"
-#include "../../common/global_data.h"
+#include "common/global_data.h"
 
 namespace hnu {
 namespace Middleware {

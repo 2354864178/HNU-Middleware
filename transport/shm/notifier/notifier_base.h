@@ -1,6 +1,6 @@
 #pragma once
 
-#include "readable_info.h"
+#include "transport/shm/core/readable_info.h"
 
 namespace hnu {
 namespace Middleware {

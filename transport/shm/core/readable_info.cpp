@@ -1,4 +1,4 @@
-#include "../../common/log.h"
+#include "common/log.h"
 #include "readable_info.h"
 
 #include <cstring>

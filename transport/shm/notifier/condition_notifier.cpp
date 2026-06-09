@@ -4,8 +4,8 @@
 #include <thread>
 
 #include "condition_notifier.h"
-#include "../../common/util.h"
-#include "../../common/log.h"
+#include "common/util.h"
+#include "common/log.h"
 
 namespace hnu {
 namespace Middleware {

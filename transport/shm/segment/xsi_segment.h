@@ -1,6 +1,6 @@
 #pragma once
 
-#include "segment.h"
+#include "transport/shm/core/segment.h"
 
 namespace hnu {
 namespace Middleware {

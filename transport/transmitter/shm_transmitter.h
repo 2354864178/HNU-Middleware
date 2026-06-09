@@ -5,13 +5,13 @@
 #include <memory>
 
 #include "transmitter.h"
-#include "../shm/notifier_factory.h"
-#include "../shm/readable_info.h"
-#include "../shm/segment_factory.h"
-#include "../../common/util.h"
-#include "../../common/log.h"
-#include "../../common/global_data.h"
-#include "../../serialize/data_stream.h"
+#include "transport/shm/notifier/notifier_factory.h"
+#include "transport/shm/core/readable_info.h"
+#include "transport/shm/segment/segment_factory.h"
+#include "common/util.h"
+#include "common/log.h"
+#include "common/global_data.h"
+#include "serialize/data_stream.h"
 
 namespace hnu {
 namespace Middleware {

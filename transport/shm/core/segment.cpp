@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "segment.h"
-#include "../../common/log.h"
+#include "common/log.h"
 
 namespace hnu {
 namespace Middleware {

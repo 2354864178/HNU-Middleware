@@ -1,8 +1,8 @@
 #include "segment_factory.h"
 #include "xsi_segment.h"
 #include "posix_segment.h"
-#include "../../common/log.h"
-#include "../../common/global_data.h"
+#include "common/log.h"
+#include "common/global_data.h"
 
 namespace hnu {
 namespace Middleware {

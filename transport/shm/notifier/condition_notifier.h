@@ -1,7 +1,7 @@
 #pragma once
 
 #include "notifier_base.h"
-#include "../../common/macros.h"
+#include "common/macros.h"
 
 #include <atomic>
 

@@ -3,7 +3,7 @@
 #include <sys/shm.h>
 
 #include "xsi_segment.h"
-#include "../../common/log.h"
+#include "common/log.h"
 
 namespace hnu {
 namespace Middleware {

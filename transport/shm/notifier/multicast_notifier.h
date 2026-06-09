@@ -4,7 +4,7 @@
 #include <atomic>
 
 #include "notifier_base.h"
-#include "../../common/macros.h"
+#include "common/macros.h"
 
 namespace hnu {
 namespace Middleware {
