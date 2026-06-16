@@ -10,6 +10,7 @@
 #include <fastdds/rtps/attributes/ReaderAttributes.hpp>
 #include <fastdds/rtps/attributes/HistoryAttributes.hpp>
 #include <xmlparser/attributes/TopicAttributes.hpp>
+#include <fastdds/rtps/builtin/data/TopicDescription.hpp>
 
 using namespace eprosima::fastdds::dds;
 using namespace eprosima::fastdds::rtps;
@@ -25,6 +26,7 @@ struct RtpsWriterAttributes {
     WriterAttributes watt;  // 配置writer的属性
     WriterQos Wqos;         // 配置writer的qos属性
     TopicAttributes Tatt;   // 配置writer的topic属性
+    TopicDescription Tdesc; // 配置writer的topic描述
 };
 
 struct RtpsReaderAttributes {
@@ -32,6 +34,7 @@ struct RtpsReaderAttributes {
     ReaderAttributes ratt;  // 配置reader的属性
     ReaderQos Rqos;         // 配置reader的qos属性
     TopicAttributes Tatt;   // 配置reader的topic属性
+    TopicDescription Tdesc; // 配置reader的topic描述
 };
 
 class AttributesFiller {
