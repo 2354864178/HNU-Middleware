@@ -54,14 +54,14 @@ protected:
     base::AtomicRWLock rw_lock_;
 };
 
+// 添加一个监听器，监听某个channel_id上的消息，listener是一个回调函数，当有消息到达时会调用这个函数
 template <typename MessageT> void Dispatcher::AddListener(const RoleAttributes& self_attr, const MessageListener<MessageT>& listener) {
     if (is_shutdown_.load()) {
         return;
     }
-    // 拿到channel_id
+
     uint64_t channel_id = self_attr.channel_id;
-    // 创建一个新的ListenerHandler
-    std::shared_ptr<ListenerHandler<MessageT>> handler;
+    std::shared_ptr<ListenerHandler<MessageT>> handler; // 创建一个新的ListenerHandler对象，专门处理MessageT类型的消息
 
     ListenerHandlerBasePtr* handler_base = nullptr;
 
@@ -73,16 +73,14 @@ template <typename MessageT> void Dispatcher::AddListener(const RoleAttributes& 
             AERROR << "please ensure that readers with the same channel[" << self_attr.channel_name << "] in the same process have the same message type";
             return;
         }
-    } else {
-        // 说明此channel_id没有对应的ListenerHandler
+    } else { // 说明此channel_id没有对应的ListenerHandler
         ADEBUG << "new reader for channel:" << GlobalData::GetChannelById(channel_id);
-        // 新建一个ListenerHandler
-        handler.reset(new ListenerHandler<MessageT>());
-        // 建立channel_id 与 ListenerHandler的对应关系，保存到msg_listeners_中
-        msg_listeners_.Set(channel_id, handler);
+
+        handler.reset(new ListenerHandler<MessageT>()); // 新建一个ListenerHandler
+        msg_listeners_.Set(channel_id, handler);        // 建立channel_id 与 ListenerHandler的对应关系，保存到msg_listeners_中
     }
-    // 为此ListenerHandler连接槽函数，一个id可以绑定多个槽函数
-    handler->Connect(self_attr.id, listener);
+
+    handler->Connect(self_attr.id, listener); // 为此ListenerHandler连接槽函数，一个id可以绑定多个槽函数
 }
 
 template <typename MessageT> void Dispatcher::AddListener(const RoleAttributes& self_attr, const RoleAttributes& opposite_attr, const MessageListener<MessageT>& listener) {
