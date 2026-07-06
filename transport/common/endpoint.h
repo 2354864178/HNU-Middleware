@@ -26,6 +26,7 @@ public:
     }
 
 private:
+protected:
     bool enabled_;
     Identity id_;
     RoleAttributes attr_;

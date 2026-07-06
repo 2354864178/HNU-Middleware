@@ -457,6 +457,11 @@ DataStream& DataStream::operator>>(string& value) {
     return *this;
 }
 
+DataStream& DataStream::operator>>(Serializable& value) {
+    read(value);
+    return *this;
+}
+
 // base-case for variadic write_args: do nothing
 void DataStream::write_args() {}
 

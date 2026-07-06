@@ -5,19 +5,37 @@
 #include "transport/config/RoleAttributes.h"
 #include "transport/config/transport_config.h"
 #include "transport/transmitter/transmitter.h"
-#include "transport/transmitter/rtps_transmitter.h"
 #include "transport/receiver/receiver.h"
+#include "common/log.h"
+
+#ifndef HNU_TRANSPORT_UNIT_TEST_LIGHT
+#include "transport/transmitter/rtps_transmitter.h"
 #include "transport/dispatcher/rtps_dispatcher.h"
 #include "transport/receiver/rtps_receiver.h"
-#include "common/log.h"
 #include "transport/transmitter/shm_transmitter.h"
 #include "transport/receiver/shm_receiver.h"
+#endif
 
 namespace hnu {
 namespace Middleware {
 namespace transport {
 
 using namespace config;
+
+#ifdef HNU_TRANSPORT_UNIT_TEST_LIGHT
+template <typename M> class RtpsTransmitter;
+template <typename M> class ShmTransmitter;
+template <typename M> class RtpsReceiver;
+template <typename M> class ShmReceiver;
+
+class RtpsDispatcher {
+public:
+    static RtpsDispatcher* Instance(bool create_if_needed = true);
+    void set_participant(const ParticipantPtr& participant);
+};
+
+using RtpsDispatcherPtr = RtpsDispatcher*;
+#endif
 
 class Transport {
 public:

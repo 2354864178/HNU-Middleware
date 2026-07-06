@@ -123,6 +123,7 @@ public:
     DataStream& operator>>(float& value);
     DataStream& operator>>(double& value);
     DataStream& operator>>(string& value);
+    DataStream& operator>>(Serializable& value);
 
     template <typename T> DataStream& operator>>(std::vector<T>& value);
 

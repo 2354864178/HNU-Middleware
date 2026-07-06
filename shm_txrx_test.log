@@ -1,0 +1,82 @@
+2026-07-07 00:06:00 DEBUG ../shm/notifier/condition_notifier.cpp:142 shm already exist, open only.
+2026-07-07 00:06:00 DEBUG ../shm/notifier/condition_notifier.cpp:205 Open true
+2026-07-07 00:06:00 DEBUG ../shm/notifier/condition_notifier.cpp:28 next_seq: 0
+2026-07-07 00:06:00 DEBUG ../../transport/dispatcher/dispatcher.h:77 new reader for channel:transport_shm_txrx_test
+2026-07-07 00:06:00 DEBUG ../shm/segment/segment_factory.cpp:16 segment type: xsi
+2026-07-07 00:06:12 DEBUG ../shm/segment/segment_factory.cpp:16 segment type: xsi
+2026-07-07 00:06:12 DEBUG ../shm/notifier/condition_notifier.cpp:142 shm already exist, open only.
+2026-07-07 00:06:12 DEBUG ../shm/notifier/condition_notifier.cpp:205 Open true
+2026-07-07 00:06:12 DEBUG ../shm/notifier/condition_notifier.cpp:28 next_seq: 0
+2026-07-07 00:06:12 DEBUG ../shm/segment/xsi_segment.cpp:115 open or create true.
+2026-07-07 00:06:12 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 0
+2026-07-07 00:06:12 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 0
+2026-07-07 00:06:12 DEBUG ../shm/segment/xsi_segment.cpp:186 open only true.
+2026-07-07 00:06:12 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 1
+2026-07-07 00:06:12 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 1
+2026-07-07 00:06:12 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 2
+2026-07-07 00:06:12 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 2
+2026-07-07 00:06:12 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 3
+2026-07-07 00:06:12 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 3
+2026-07-07 00:06:12 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 4
+2026-07-07 00:06:12 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 4
+2026-07-07 00:06:12 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 5
+2026-07-07 00:06:12 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 5
+2026-07-07 00:06:13 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 6
+2026-07-07 00:06:13 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 6
+2026-07-07 00:06:13 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 7
+2026-07-07 00:06:13 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 7
+2026-07-07 00:06:13 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 8
+2026-07-07 00:06:13 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 8
+2026-07-07 00:06:13 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 9
+2026-07-07 00:06:13 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 9
+2026-07-07 00:06:13 DEBUG ../shm/core/segment.cpp:119 destroy.
+2026-07-07 00:08:17 DEBUG ../shm/segment/segment_factory.cpp:16 segment type: xsi
+2026-07-07 00:08:17 DEBUG ../shm/notifier/condition_notifier.cpp:142 shm already exist, open only.
+2026-07-07 00:08:17 DEBUG ../shm/notifier/condition_notifier.cpp:205 Open true
+2026-07-07 00:08:17 DEBUG ../shm/notifier/condition_notifier.cpp:28 next_seq: 10
+2026-07-07 00:08:17 DEBUG ../shm/segment/xsi_segment.cpp:47 shm already exist, open only.
+2026-07-07 00:08:17 DEBUG ../shm/segment/xsi_segment.cpp:186 open only true.
+2026-07-07 00:08:17 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 10
+2026-07-07 00:08:18 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 11
+2026-07-07 00:08:18 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 12
+2026-07-07 00:08:18 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 13
+2026-07-07 00:08:18 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 14
+2026-07-07 00:08:18 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 15
+2026-07-07 00:08:18 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 16
+2026-07-07 00:08:18 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 17
+2026-07-07 00:08:18 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 18
+2026-07-07 00:08:19 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 19
+2026-07-07 00:08:19 DEBUG ../shm/core/segment.cpp:119 destroy.
+2026-07-07 00:08:30 DEBUG ../shm/notifier/condition_notifier.cpp:142 shm already exist, open only.
+2026-07-07 00:08:30 DEBUG ../shm/notifier/condition_notifier.cpp:205 Open true
+2026-07-07 00:08:30 DEBUG ../shm/notifier/condition_notifier.cpp:28 next_seq: 20
+2026-07-07 00:08:30 DEBUG ../../transport/dispatcher/dispatcher.h:77 new reader for channel:transport_shm_txrx_test
+2026-07-07 00:08:30 DEBUG ../shm/segment/segment_factory.cpp:16 segment type: xsi
+2026-07-07 00:08:36 DEBUG ../shm/segment/segment_factory.cpp:16 segment type: xsi
+2026-07-07 00:08:36 DEBUG ../shm/notifier/condition_notifier.cpp:142 shm already exist, open only.
+2026-07-07 00:08:36 DEBUG ../shm/notifier/condition_notifier.cpp:205 Open true
+2026-07-07 00:08:36 DEBUG ../shm/notifier/condition_notifier.cpp:28 next_seq: 20
+2026-07-07 00:08:36 DEBUG ../shm/segment/xsi_segment.cpp:47 shm already exist, open only.
+2026-07-07 00:08:36 DEBUG ../shm/segment/xsi_segment.cpp:186 open only true.
+2026-07-07 00:08:36 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 20
+2026-07-07 00:08:36 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 20
+2026-07-07 00:08:36 DEBUG ../shm/segment/xsi_segment.cpp:186 open only true.
+2026-07-07 00:08:36 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 21
+2026-07-07 00:08:36 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 21
+2026-07-07 00:08:37 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 22
+2026-07-07 00:08:37 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 22
+2026-07-07 00:08:37 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 23
+2026-07-07 00:08:37 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 23
+2026-07-07 00:08:37 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 24
+2026-07-07 00:08:37 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 24
+2026-07-07 00:08:37 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 25
+2026-07-07 00:08:37 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 25
+2026-07-07 00:08:37 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 26
+2026-07-07 00:08:37 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 26
+2026-07-07 00:08:37 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 27
+2026-07-07 00:08:37 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 27
+2026-07-07 00:08:37 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 28
+2026-07-07 00:08:37 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 28
+2026-07-07 00:08:37 DEBUG ../../transport/transmitter/shm_transmitter.h:107 Writing sharedmem message: transport_shm_txrx_test to block: 29
+2026-07-07 00:08:37 DEBUG ../dispatcher/shm_dispatcher.cpp:61 Reading sharedmem message: transport_shm_txrx_test from block: 29
+2026-07-07 00:08:37 DEBUG ../shm/core/segment.cpp:119 destroy.

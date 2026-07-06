@@ -102,7 +102,7 @@ void ShmDispatcher::ThreadFunc() {
                 continue;
             }
             if (previous_indexs_.count(channel_id) == 0) {
-                previous_indexs_[channel_id] == UINT32_MAX;
+                previous_indexs_[channel_id] = UINT32_MAX;
             }
             uint32_t& previous_index = previous_indexs_[channel_id];
             if (block_index != 0 && previous_index != UINT32_MAX) {
